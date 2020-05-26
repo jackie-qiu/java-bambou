@@ -169,6 +169,7 @@ public class RestSession<R extends RestRootObject> implements RestSessionOperati
         currentSession.set(this);
         restClientService.prepareSSLAuthentication(certificate, privateKey);
         authenticate();
+        currentSession.set(this);
     }
 
     @Override
@@ -367,6 +368,7 @@ public class RestSession<R extends RestRootObject> implements RestSessionOperati
                     // request again. A new API key might get issued as a result
                     reset();
                     authenticate();
+                    currentSession.set(this);
 
                     // Update authorization header with new API key
                     headers.set(HttpHeaders.AUTHORIZATION, getAuthenticationHeader());
